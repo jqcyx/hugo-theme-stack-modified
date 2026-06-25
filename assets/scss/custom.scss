@@ -1,0 +1,102 @@
+
+/*
+    You can add your own custom styles here.
+*/
+/* 将代码块中的 Tab 键宽度限制为 4 个空格 */
+code, pre, .chroma {
+    -moz-tab-size: 4; /* 兼容 Firefox */
+    -o-tab-size: 4;   /* 兼容旧版 Opera */
+    tab-size: 4;
+}
+/* =========================================
+   文章末尾：上一篇 / 下一篇 导航卡片样式
+   ========================================= */
+.post-navigation {
+    display: flex;
+    gap: 1rem;            /* 两张卡片之间的间距 */
+    margin: 2rem 0;       /* 距离上下文的间距 */
+}
+
+.post-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    /* 直接调用 Stack 内置变量，完美兼容夜间模式 */
+    background-color: var(--card-background); 
+    border-radius: var(--card-border-radius, 8px);
+    box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.05));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none !important; /* 确保不带下划线 */
+    overflow: hidden;
+}
+
+/* 悬停动画效果 */
+.post-nav-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md, 0 4px 8px rgba(0,0,0,0.1));
+}
+
+.post-nav-prev {
+    align-items: flex-start;
+}
+
+.post-nav-next {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.post-nav-label {
+    font-size: 2rem;
+    color: var(--light-text-color, #888);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.post-nav-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--body-text-color, #333);
+    line-height: 1.5;
+    /* 超长标题优雅截断处理（最多显示2行） */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 移动端自适应适配 */
+@media (max-width: 768px) {
+    .post-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .post-nav-next {
+        /* 手机端由于屏幕宽度小，统一采用左对齐视觉效果更好 */
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+/* ----------------------------------
+   深浅色模式切换：动态文本提示
+---------------------------------- */
+#dark-mode-toggle {
+
+    /* 默认情况（浅色模式）：显示“浅色模式”文本，隐藏“深色模式”文本 */
+    .mode-text.dark { display: none; }
+    .mode-text.light { display: inline-block; }
+}
+
+/* 强制进入深色模式时：隐藏“浅色”，显示“深色” */
+[data-scheme="dark"] #dark-mode-toggle {
+    .mode-text.light { display: none; }
+    .mode-text.dark { display: inline-block; }
+}
+
+/* 自动模式 (auto) 且系统偏好为深色时：隐藏“浅色”，显示“深色” */
+@media (prefers-color-scheme: dark) {
+    [data-scheme="auto"] #dark-mode-toggle {
+        .mode-text.light { display: none; }
+        .mode-text.dark { display: inline-block; }
+    }
+}

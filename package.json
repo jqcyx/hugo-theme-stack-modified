@@ -1,0 +1,12 @@
+{
+  "name": "hugo-stack-encrypt",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "hugo && node encrypt.js",
+    "preview": "npm run build && serve public"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "crypto-js": "^4.2.0"
+  }
+}

@@ -1,0 +1,69 @@
+{{ define "body-class" }}
+    article-page
+    {{/* 
+        Enable the right sidebar if
+            - Widget different from 'TOC' is enabled
+            - TOC is enabled and not empty
+    */}}
+    {{- $HasWidgetNotTOC := false -}}
+    {{- $TOCWidgetEnabled := false -}}
+    {{- range .Site.Params.widgets.page -}}
+        {{- if ne .type "toc" -}}
+            {{ $HasWidgetNotTOC = true -}}
+        {{- else -}}
+            {{ $TOCWidgetEnabled = true -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- $TOCEnabled := and (default .Site.Params.article.toc .Params.toc) $TOCWidgetEnabled -}}
+    {{- $hasTOC := ge (len .TableOfContents) 100 -}}
+    {{- .Scratch.Set "TOCEnabled" (and $TOCEnabled $hasTOC) -}}
+    
+    {{- .Scratch.Set "hasWidget" (or $HasWidgetNotTOC (and $TOCEnabled $hasTOC)) -}}
+{{ end }}
+
+{{ define "main" }}
+    {{ partial "article/article.html" . }}
+
+    {{ if .Params.links }}
+        {{ partial "article/components/links" . }}
+    {{ end }}
+
+    {{ partial "article/components/related-content" . }}
+
+    <!-- ✨ 新增代码开始：上一篇/下一篇 导航按钮 ✨ -->
+    <nav class="post-navigation">
+        <!-- 上一篇 (在Hugo中，PrevInSection指向时间更老的文章) -->
+        {{ with .PrevInSection }}
+        <a href="{{ .RelPermalink }}" class="post-nav-item post-nav-prev">
+            <div class="post-nav-label">&larr; 上一篇</div>
+            <div class="post-nav-title">{{ .Title }}</div>
+        </a>
+        {{ end }}
+
+        <!-- 下一篇 (在Hugo中，NextInSection指向时间更新的文章) -->
+        {{ with .NextInSection }}
+        <a href="{{ .RelPermalink }}" class="post-nav-item post-nav-next">
+            <div class="post-nav-label">下一篇 &rarr;</div>
+            <div class="post-nav-title">{{ .Title }}</div>
+        </a>
+        {{ end }}
+    </nav>
+    <!-- ✨ 新增代码结束 ✨ -->
+
+    <!-- 原本的评论渲染区域 -->
+    {{ partial "comments/include" . }}
+     
+    {{ if not (eq .Params.comments false) }}
+        {{ partial "comments/include" . }}
+    {{ end }}
+
+    {{ partialCached "footer/footer" . }}
+
+    {{ partialCached "article/components/photoswipe" . }}
+    {{ partial "article/components/mermaid" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ if .Scratch.Get "hasWidget" }}{{ partial "sidebar/right.html" (dict "Context" . "Scope" "page") }}{{ end}}
+{{ end }}

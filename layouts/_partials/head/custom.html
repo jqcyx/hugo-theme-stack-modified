@@ -1,0 +1,7 @@
+{{ if .Params.password }}
+<!-- 仅用于向构建脚本传递密码，在生成最终页面时会被移除，绝对安全 -->
+<meta name="encrypt-password" content="{{ .Params.password }}">
+{{ if .Params.passwordHint }}
+<meta name="encrypt-hint" content="{{ .Params.passwordHint }}">
+{{ end }}
+{{ end }}

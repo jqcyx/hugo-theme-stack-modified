@@ -1,0 +1,24 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+[[social]]
+    identifier = "github"
+    name       = "GitHub"
+    url        = "https://github.com/jqcyx"
+
+    [social.params]
+        icon = "brand-github"
+
+[[social]]
+    identifier = "luogu"
+    name       = "Luogu"
+    url        = "https://www.luogu.com.cn/user/1047464"
+
+    [social.params]
+        icon = "brand-luogu"

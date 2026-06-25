@@ -1,0 +1,15 @@
+KaTeX = [
+    { src = "https://katex.jqcyx.qzz.io/katex.min.css", integrity = "sha384-UA8juhPf75SzzAMA/4fo3yOU7sBJ0om7SCD2GHq0fZqZco6tr1UCV7nUbk9J90JM", type = "style" },
+    { src = "https://katex.jqcyx.qzz.io/katex.min.js", integrity = "sha384-Tt7wBxLKwSzFVRET4O4U9H6v8MNaQ/CjN2FMP4xFm0ErrFu6aNqoonRVW5W40iGI", type = "script", defer = true },
+    { src = "https://katex.jqcyx.qzz.io/auto-render.min.js", integrity = "sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz", type = "script", defer = true },
+]
+
+Cactus = [
+    { src = "https://latest.cactus.chat/cactus.js", type = "script" },
+    { src = "https://latest.cactus.chat/style.css", type = "style" },
+]
+
+[PhotoSwipe]
+    Style    = "https://testingcf.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css"
+    Core     = "https://testingcf.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.min.js"
+    Lightbox = "https://testingcf.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js"

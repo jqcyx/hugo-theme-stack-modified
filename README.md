@@ -28,3 +28,5 @@
 password: "你的密码"
 passwordHint: "你的密码提示（可选）"
 ```
+
+使用本改版，请指定 `HUGO_VERSION` 至少 `0.158.0`。
